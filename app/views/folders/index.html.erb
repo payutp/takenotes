@@ -1,0 +1,9 @@
+<h2> Listing folders </h2>
+
+<table>
+	<% @folders.sort_by{ |folder| folder.id}.each do |folder| %>
+		<tr>
+			<td><%= link_to folder.name, folder %> </td>
+		</tr>
+	<% end %>
+</table>
