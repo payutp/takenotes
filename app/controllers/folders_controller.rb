@@ -40,6 +40,7 @@ class FoldersController < ApplicationController
 
 		respond_to do |format|
 			format.json {render :json => note }
+                        format.all {render :text => "Only JSON supported at the moment"}
 		end
 	end
 
@@ -52,6 +53,7 @@ class FoldersController < ApplicationController
 
 		respond_to do |format|
 			format.json {render :json => note }
+                        format.all {render :text => "Only JSON supported at the moment"}
 		end
 	end
 
@@ -63,6 +65,7 @@ class FoldersController < ApplicationController
 
 		respond_to do |format|
 			format.json {render :json => nil }
+                        format.all {render :text => "Only JSON supported at the moment"}
 		end
 	end
 end
