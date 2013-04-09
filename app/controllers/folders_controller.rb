@@ -36,8 +36,8 @@ class FoldersController < ApplicationController
 	# return a json object fot that note
 	def create_note
 		folder = current_user.folders.find(params[:id])
-		note = folder.notes.create(:text => params[:text], :x => params[:x], :y => params[:y],
-			:width => params[:width], :height => params[:height])
+		note = folder.create_note(params[:text], params[:x], params[:y], params[:width], params[:height])
+
 		respond_to do |format|
 			format.json {render :json => note }
 		end
@@ -48,8 +48,7 @@ class FoldersController < ApplicationController
 	def edit_note
 		folder = current_user.folders.find(params[:id])
 		note = folder.notes.find(params[:note_id])
-		note.update_attributes(:text => params[:text], :x => params[:x], :y => params[:y],
-			:width => params[:width], :height => params[:height])
+		note = note.update_value(params[:text], params[:x], params[:y], params[:width], params[:height])
 
 		respond_to do |format|
 			format.json {render :json => note }
