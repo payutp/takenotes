@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
  	# Check if the user is logged in. If not, redirect the user to the log in page.
 	def require_ownership
 		unless current_user
-			redirect_to login_path, :notice => "You must login first!"
+			redirect_to login_path
 		end
 	end
 end
