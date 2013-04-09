@@ -1,3 +1,3 @@
 class NotesController < ApplicationController
-	before_ownership :require_ownership
+	before_filter :require_ownership
 end
