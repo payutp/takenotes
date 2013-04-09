@@ -3,7 +3,7 @@ Project 3: Network Stickies
 
 ###Heroku URL
 
-http://afternoon-shelf-7840.herokuapp.com/
+http://gentle-scrubland-6295.herokuapp.com/
 
 ###Notes
 
