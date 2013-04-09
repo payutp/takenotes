@@ -3,7 +3,7 @@ Project 3: Network Stickies
 
 ###Heroku URL
 
-Please put it here: http://sampleapp.herokuapp.com
+http://afternoon-shelf-7840.herokuapp.com/
 
 ###Notes
 

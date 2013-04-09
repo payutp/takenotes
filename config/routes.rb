@@ -9,6 +9,10 @@ PayutpProj3::Application.routes.draw do
   resources :users
   resources :sessions
 
+  match "folders/:id/get_notes" => "folders#get_notes", :via => :get
+  match "folders/:id/create_note" => "folders#create_note", :via => :post
+  match "folders/:id/edit_note" => "folders#edit_note", :via => :post
+  match "folders/:id/delete_note" => "folders#delete_note", :via => :post
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"

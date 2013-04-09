@@ -12,8 +12,7 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
 			redirect_to folders_path, :notice => "Logged in"
 		else
-			flash.now.alert = "Invalid email or password"
-			render "new"
+			redirect_to login_path, :notice => "Invalid e-mail or password"
 		end
 	end
 

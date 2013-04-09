@@ -1,11 +1,11 @@
 <h2><%= @folder.name %> </h2>
 
-
-<div class="note" contenteditable="true">
+<div class="note">
 
 </div>
 
-<input type="button" value="New" class="new">
+<input type="button" value="New" id="new-note">
 
-<%= javascript_include_tag "folders" %>
+<%= render :partial => "notes.js" %>
+<%= render :partial => "folders.js" %>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
