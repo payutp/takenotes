@@ -10,7 +10,10 @@ class UsersController < ApplicationController
 			@user.create_default_folder
 			redirect_to folders_path, :notice => "You are signed up."
 		else
-			render "new"
+			respond_to do |format|
+				format.html {render "new"}
+				format.json {render :json => nil}
+			end
 		end
 	end
 end

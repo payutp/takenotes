@@ -1,11 +1,22 @@
+<%= javascript_include_tag "chosen.jquery" %>
 <h2><%= @folder.name %> </h2>
 
+
+
 <div class="note">
+</div>
+
+<input type="button" value="New Note" id="new-note">
+<input type="button" value="Back" id="back">
+<br/>
+<% if @folder.name != "Default" %>
+<input type="button" value="Delete Folder" id="delete-folder">
+<% end %>
+
+<div id="dialog-select" title="Choose a folder to move to">
 
 </div>
 
-<input type="button" value="New" id="new-note">
-
 <%= render :partial => "notes.js" %>
-<%= render :partial => "folders.js" %>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<%= render :partial => "notes_init.js" %>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/ui-lightness/jquery-ui.css" />

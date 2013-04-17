@@ -16,7 +16,7 @@ var Note = function(spec) {
 				height: spec.height
 			},
 			function(data){
-				new Note(data);
+				new Note($.extend(data, { new: 1 }));
 			}
 		);
 	};
@@ -32,7 +32,7 @@ var Note = function(spec) {
 				note_id: note_id
 			},
 			function(data){
-				new Note(data);
+				// new Note(data);
 			}
 		);
 	};
@@ -48,6 +48,21 @@ var Note = function(spec) {
 		);
 	};
 
+	var get_other_folders = function() {
+
+		var get_folders = function(callback) {
+			
+		};
+
+		var x = get_folders( function(data) {
+			return data;
+		});
+	};
+
+	var move_note = function(id, new_folder_id) {
+
+
+	};
 
 	var process = function(spec) {
 
@@ -69,9 +84,54 @@ var Note = function(spec) {
 				}
 			};
 
+			var changeFolder = function(id, folder_id) {
+				$.post("/folders/<%= @folder.id %>/move_folder", {
+						note_id: id,
+						new_folder_id: folder_id
+					},
+					function(data) {
+					$("#dialog" + id).remove();
+				});
+
+			};
+
+			var moveNote = function(id) {
+				$.get("/folders/<%= @folder.id %>/get_other_folders", {}
+					, function(data) {
+						var len = data.length;
+
+						var s = "<label> Folder name: </label>";
+						s += "<select data-placeholder='Choose a folder...' id='folder-select' class='chzn-select'>";
+						for (var i = 0; i < len; i++) {
+							s += "<option value=" + data[i].id + ">" + data[i].name + "</option>";
+						};
+						s += "</select>";
+
+						$("#dialog-select").append(s);
+						//$("select").chosen();
+
+						$("#dialog-select").dialog({
+							modal: true,
+							zIndex: 998,	
+							width: 350,
+							height: 200,
+							buttons: {
+								Move: function() {changeFolder(note_id, $("#folder-select").val()); $(this).dialog("close")},
+								Cancel: function() {$(this).dialog("close");}
+							},
+							close: function() {
+							$("#dialog-select").text("");
+							}
+						});
+					}
+				);
+
+			};
+
 			var viewMode = function() {
 				note.attr('contenteditable', false);
 				note.dialog("option", "buttons", [
+					{text: "Move to", click: function() {moveNote(note_id);}},
 					{text: "Edit", click: editMode }
 				]);
 			};
@@ -79,7 +139,8 @@ var Note = function(spec) {
 			var editMode = function() {
 				note.attr('contenteditable', true).focus();
 				note.dialog("option", "buttons", [
-					{text: "Submit", click: function() {edit_note($.extend({text: note.text()}, pos())); }},	
+					{text: "Save", click: function() {edit_note($.extend({text: note.text()}, pos()));
+					viewMode(); }},	
 					{text: "Cancel", click: viewMode }
 				]);
 			};
@@ -100,10 +161,15 @@ var Note = function(spec) {
 				},
 				position: [spec.x, spec.y],
 				width: spec.width,
-				height: spec.height
+				height: spec.height,
+				title: "Note " + spec.created_at
 			});
 
-			viewMode();
+			if (spec.new || note.prop('contenteditable') === true) {
+				editMode();
+			} else {
+				viewMode();
+			}
 		}
 	}
 	process(spec);

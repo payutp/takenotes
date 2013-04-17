@@ -11,6 +11,64 @@ class FoldersController < ApplicationController
 		end
 	end
 
+	# create a new folder
+	def create
+		if current_user.folders.exists?(:name => params[:name])
+			ret = { :status => "duplicated" }
+		else 
+			ret = current_user.folders.create(:name => params[:name])
+		end
+
+		respond_to do |format|
+			format.json {render :json => ret }
+			format.all {render :text => "Only JSON supported at the moment"}
+		end
+	end
+
+	# delete a folder, except default folder
+	def delete
+		folder = current_user.folders.find(params[:id])
+		name = folder.name
+		if folder.name == "Default"
+			ret = { :status => "default" }
+		else
+			folder.destroy
+			ret = { :status => "success", :name => name }
+		end
+
+		respond_to do |format|
+			format.json {render :json => ret }
+			format.all {render :text => "Only JSON supported at the moment"}
+		end	
+	end
+
+	# get all folders that don't have id equal to specified id
+	def get_other_folders
+		folders = current_user.folders.where(["id != ?", params[:id]])
+
+		respond_to do |format|
+			format.json {render :json => folders}
+			format.all {render :text => "Only JSON supported at the moment"}
+		end
+	end
+
+	# move a note from one folder to another
+	def move_folder
+		folder = current_user.folders.find(params[:id])
+		new_folder = current_user.folders.find(params[:new_folder_id])
+		note = folder.notes.find(params[:note_id])
+		#att = note.attributes
+		#new_folder.notes.create_note(att)
+		#note.destroy
+		new_folder.notes << note
+
+
+		respond_to do |format|
+			format.json { render :json => {:status => "success"}}
+			format.all {render :text => "Only JSON supported at the moment"}
+		end
+	end
+
 	# show notes for a folder
 	def show
 		@folder = current_user.folders.find(params[:id])
@@ -40,7 +98,7 @@ class FoldersController < ApplicationController
 
 		respond_to do |format|
 			format.json {render :json => note }
-                        format.all {render :text => "Only JSON supported at the moment"}
+      format.all {render :text => "Only JSON supported at the moment"}
 		end
 	end
 
@@ -53,7 +111,7 @@ class FoldersController < ApplicationController
 
 		respond_to do |format|
 			format.json {render :json => note }
-                        format.all {render :text => "Only JSON supported at the moment"}
+      format.all {render :text => "Only JSON supported at the moment"}
 		end
 	end
 
@@ -65,7 +123,7 @@ class FoldersController < ApplicationController
 
 		respond_to do |format|
 			format.json {render :json => nil }
-                        format.all {render :text => "Only JSON supported at the moment"}
+      format.all {render :text => "Only JSON supported at the moment"}
 		end
 	end
 end

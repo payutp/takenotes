@@ -13,6 +13,9 @@ PayutpProj3::Application.routes.draw do
   match "folders/:id/create_note" => "folders#create_note", :via => :post
   match "folders/:id/edit_note" => "folders#edit_note", :via => :post
   match "folders/:id/delete_note" => "folders#delete_note", :via => :post
+  match "folders/:id/delete" => "folders#delete", :via => :post
+  match "folders/:id/get_other_folders" => "folders#get_other_folders", :via => :get
+  match "folders/:id/move_folder" => "folders#move_folder", :via => :post
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"

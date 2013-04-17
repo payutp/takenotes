@@ -2,32 +2,47 @@
 
 $(function() {
 
-	// get all notes for a specified folder and add them
-	var url = '/folders/<%= @folder.id %>/get_notes';
-	var data = {};
-	$.get(url, data, function(data) {
-		var len = data.length;
-		for (var i = 0; i < len; i++) {
-			new Note(data[i]);
-		}
-	});
+	// dialog for a new folder
+	var noteDialog = function() {
+		$("#new-dialog").dialog({
+			buttons: [{ text: "Create", click: function() {
+									t = $(this).text();
+									if (!t || t.length === 0 || t === " ") {
+										alert("Please specify a name!");
+									} else {
+										create($(this).text());
+										$(this).text("");
+										$(this).dialog("close");
+									}}},
+								{ text: "Cancel", click: function() { $(this).dialog("close"); }} ],
+			width: 400,
+			height: 200,
+			title: "Please enter folder name:",
+			modal: true,
+		});
+		
+		$("#new-dialog").attr('contenteditable', true).focus();	
+	};
 
-	var DEFAULT_WIDTH = 300;
-	var DEFAULT_HEIGHT = 300;
-
-	// method for creating a new note
-	$("#new-note").click(function() {
-		var spec = {
-			id: 0,
-			text: "",
-			x: $(window).width()/2 - DEFAULT_WIDTH/2,
-			y: $(window).height()/2 - DEFAULT_HEIGHT/2,
-			width: DEFAULT_WIDTH,
-			height: DEFAULT_HEIGHT
+	// send new folder request to server
+	var create = function(text) {
+			$.post(
+			"/folders/", {
+				name: text
+			}, function(data) {
+				if (data.status === "duplicated") {
+					alert("Duplicated name!")
+				} else {
+					$("#menu-container ul").append('<li><a href=' + '/folders/' + data.id + '>' + data.name + '</a></li>');
+					$("#menu").menu("refresh");
+				}
+			}
+			);
 		};
-		new Note(spec);
 
-	}).button();
+	$("#new-folder").click(function() {noteDialog();}).button();
+	$("#menu").menu();
 });
 
 </script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/ui-lightness/jquery-ui.css" />
