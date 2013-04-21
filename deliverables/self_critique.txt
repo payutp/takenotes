@@ -1,0 +1,35 @@
+*********** SUMMARY ASSESSMENT FROM USER'S PERSPECTIVE ***********
+
+The web site is easy to use and users can figure out how it works by doing few clicks. The positions of elements can be rearranged and improved for better navigation. The order of folders should be able to be changed, like moving a folder up or down. The notes are easy to edit and save, and the saving functions seem to work properly (data stored in the server is the same as what a user expect to). The only problem is that when a user clicks a note, it should be the topmost note; however, the server doesn't memorize this event, and the order of notes only depends on the note ids. Moreover, the note title should be able to edited, and it will be cool to add features like notes speak peek from listing folders page. Also, think about whether the site should check if an e-mail is really e-mail.
+
+
+*********** SUMMARY ASSESSMENT FROM DEVELOPER'S PERSPECTIVE ***********
+
+The codes structure looks nice and easy for understand (for me). Nice use of comments although can be more specific. There should be more comments for js files. Good work for not having callbacks. Also, look out for respond_to and render usages.
+
+*********** MOST AND LEAST SUCCESSFUL DECISIONS ***********
+
+Most:
+Using a Dialog Jquery-UI plugin. This makes the note implementation a lot easier. I learnt about this plugin when I talked to a person about creating a resizable text box. There are a lot of techniques/plug-ins to learn about writing web programming.
+
+Least:
+I don't know what is a least successful decision is. An alternative for my note design is not having an edit/save button. This allows extensions such as note collaboration (like engage app), but since it's not necessary and there might be bugs if not implemented well, so I decide to go with edit/save button.
+
+
+*********** PRIORITIES FOR IMPROVEMENT ***********
+1. Change positions of web elements.
+2. Implement e-mail verification feature.
+
+*********** MOST AND LEAST SUCCESSFUL ASPECTS OF PROJECT ***********
+
+Most:
+Learning how to write javascript. I think this project teaches us a lot about javascript and concepts from lectures such as DOM manipulation.
+
+Least:
+About use of callbacks. I'm still not sure about the concept of callbacks. There are some parts of my code that callback will simplify them a lot. I think there should be some clear examples to show how to replace callback with another way of implementation.
+
+*********** WHAT I LEARNED FROM IT AND CAN IMPROVE ON NEXT TIME ***********
+
+I definitely learn more about how to write javascript code. Writing an actual code makes me understand it more. I'm more comfortable with manipulating DOM elements.
+
+Moreover, I learn that there are a lot of techniques/plug-ins for web programming out there. Therefore, it's always helpful to google when about to implement anything first.

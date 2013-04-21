@@ -1,0 +1,29 @@
+Peer Critique for rohanm.
+
+SUMMARY ASSESSMENT FROM USER'S PERSPECTIVE
+
+It's nice to implement the phone and email verifications, but when I signed up, I was redirected to the page with red text "We're sorry, but something went wrong," but I received an e-mail, so you should check how you redirect the page.
+
+Since I did not got added to the whitelist, I modified the code so that it skipped verifications, and I didn't know how they work in verification steps.
+
+I think you should allow multiple lines of content. Having only one line makes it hard for user to actually write down and keep track of stuff.
+
+Having mailing and texting features is really cool. Although I have no change to try it since I didn't do the verifications, the feature could be really useful in some situation. Nice job overall.
+
+SUMMARY ASSESSMENT FROM DEVELOPER'S PERSPECTIVE
+
+Your code is well-organized and easy to understand. Nice use of comments since you includes requires/modifies/effects. Nothing to change. Nice work on implementing user removing, but I'm not sure if there will be a problem if one user just signed up and didn't verify yet, and then another user registered for an account, causing the first account to be deleted?
+
+
+MOST AND LEAST SUCCESSFUL DECISIONS
+
+Most:
+Enforcing both e-mail and phone verifications. First I was thinking if only one was enough, but then I think you made the right decision, so that there is no spamming on text/e-mail.
+
+Least:
+I don't think there is any least successful decisions since your app seems to work as a medium for forwarding notes to e-mail/phone. Personally, I just don't like a one-line note, but if you have a reason behind that, then it is fine.
+
+PRIORITIES FOR IMPROVEMENT
+1. Check your redirect page after sign up.
+2. You should consider allowing multiple lines of note.
+3. Make sure that when a second user registers for the site, it doesn't delete the account of a recently registered user who haven't verified the account yet.
